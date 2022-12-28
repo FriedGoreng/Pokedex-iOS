@@ -29,7 +29,9 @@ extension Project {
             resources: ["Targets/\(name)/Resources/**"],
             dependencies: [
                 .external(name: "Loadable"),
-                .external(name: "PokemonTypes")
+                .external(name: "PokemonTypes"),
+                .external(name: "Requests"),
+                .external(name: "RequestsLive")
             ]
         )
 
