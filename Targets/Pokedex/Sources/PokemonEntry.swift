@@ -42,6 +42,8 @@ struct PokemonEntry: View {
                             .font(.subheadline).padding(.init(top: 5, leading: 0, bottom: 0, trailing: 0))
                     }.padding()
                 }
+                StatsChart([])
+                Text("HEY")
                 Spacer()
                 
             }.padding()
