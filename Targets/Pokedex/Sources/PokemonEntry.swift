@@ -2,20 +2,17 @@
 import SwiftUI
 import Loadable
 import Combine
+import Requests
 
 class ContentViewModel: ObservableObject {
     @Published var content: Loadable<Pokemon, NSError> = Loadable<Pokemon, NSError>()
     var entry: PokeEntry
     var pokemonRequestCancellable: AnyCancellable?
     
-    init(_ entry: PokeEntry) {
+    init(_ entry: PokeEntry, _ request: Requests) {
         self.entry = entry
-        self.pokemonRequestCancellable = URLSession.shared.dataTaskPublisher(for: Pokemon.getWebURL(entry.id))
-            .map{data, _ in data}
-            .decode(type: Pokemon.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main) //changing UI must be done on main thread. 
+        self.pokemonRequestCancellable = request.fetchPokemonEntry()
             .sink(receiveCompletion: { _ in }, receiveValue: {[weak self] pokemon in
-                print(pokemon.stats)
                 self?.content.setLoadedState(pokemon)
             })
     }
@@ -42,8 +39,7 @@ struct PokemonEntry: View {
                             .font(.subheadline).padding(.init(top: 5, leading: 0, bottom: 0, trailing: 0))
                     }.padding()
                 }
-                StatsChart([])
-                Text("HEY")
+                StatsChart(pokemon.stats)
                 Spacer()
                 
             }.padding()
@@ -57,6 +53,6 @@ struct PokemonEntry: View {
 
 struct PokemonEntry_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonEntry(.init(.init(id: 1)))
+        PokemonEntry(.init(.init(id: 1), Requests.bulbasaur))
     }
 }

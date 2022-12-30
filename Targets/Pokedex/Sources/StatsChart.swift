@@ -1,10 +1,11 @@
 import SwiftUI
 import Charts
+import Requests
 
 struct StatsChart: View {
-    let statList: [Pokemon.Stats]
+    let statList: Pokemon.Stats
     
-    init?(_ statList: [Pokemon.Stats]) {
+    init?(_ statList: Pokemon.Stats) {
         self.statList = statList
     }
     
@@ -15,27 +16,27 @@ struct StatsChart: View {
             Chart {
                 BarMark(
                     x: .value("Stat", "hp"),
-                    y: .value("Value", 50)
+                    y: .value("Value", statList.hp.baseStat)
                 ).foregroundStyle(.brown)
                 BarMark(
                     x: .value("Stat", "atk"),
-                    y: .value("Value", 100)
+                    y: .value("Value", statList.atk.baseStat)
                 ).foregroundStyle(.indigo)
                 BarMark(
                     x: .value("Stat", "def"),
-                    y: .value("Value", 75)
+                    y: .value("Value", statList.def.baseStat)
                 ).foregroundStyle(.green)
                 BarMark(
                     x: .value("Stat", "spAtk"),
-                    y: .value("Value", 36)
+                    y: .value("Value", statList.spAtk.baseStat)
                 ).foregroundStyle(.mint)
                 BarMark(
                     x: .value("Stat", "spDef"),
-                    y: .value("Value", 26)
+                    y: .value("Value", statList.spDef.baseStat)
                 ).foregroundStyle(.purple)
                 BarMark(
                     x: .value("Stat", "speed"),
-                    y: .value("Value", 50)
+                    y: .value("Value", statList.speed.baseStat)
                 ).foregroundStyle(.orange)
             }
         }
@@ -44,12 +45,6 @@ struct StatsChart: View {
 
 struct StatsChart_Previews: PreviewProvider {
     static var previews: some View {
-        StatsChart([
-            .hp(.init(baseStat: 50, effort: 0, stat: .init(name: "hp", url: "someURL"))),
-            .atk(.init(baseStat: 50, effort: 0, stat: .init(name: "hp", url: "someURL"))),
-            .def(.init(baseStat: 50, effort: 0, stat: .init(name: "hp", url: "someURL"))),
-            .spAtk(.init(baseStat: 50, effort: 0, stat: .init(name: "hp", url: "someURL"))),
-            .spDef(.init(baseStat: 50, effort: 0, stat: .init(name: "hp", url: "someURL"))),
-        ])
+        StatsChart(Pokemon.Stats(hp: 35, atk: 35, def: 35, spAtk: 35, spDef: 35, speed: 35))
     }
 }

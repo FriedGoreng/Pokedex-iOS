@@ -2,6 +2,7 @@
 // Navigation Stack will increase complexity here when we introduce regions
 //As well as sorters and other things
 import SwiftUI
+import RequestsLive
 
 struct PokeEntry: Hashable{
     let id: Int
@@ -22,7 +23,7 @@ struct NavigationView: View {
                         }
                     }
             }.navigationDestination(for: PokeEntry.self) { entry in
-                PokemonEntry(ContentViewModel(entry))
+                PokemonEntry(ContentViewModel(entry, .live(id: String(entry.id))))
             }
     }
 }
