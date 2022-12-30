@@ -1,6 +1,9 @@
-public struct Requests {
-    public private(set) var text = "Hello, World!"
+import Combine
 
-    public init() {
+public struct Requests {
+    public var fetchPokemonEntry: () -> AnyPublisher<Pokemon, Error>
+    
+    public init(fetchPokemonEntry: @escaping () -> AnyPublisher<Pokemon, Error>) {
+        self.fetchPokemonEntry = fetchPokemonEntry
     }
 }

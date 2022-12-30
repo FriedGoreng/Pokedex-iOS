@@ -5,7 +5,6 @@ let dependencies = Dependencies(
         .package(path: "./LocalLibraries/Loadable"),
         .package(path: "./LocalLibraries/PokemonTypes"),
         .package(path: "./LocalLibraries/Requests"),
-        .package(path: "./LocalLibraries/RequestsLive")
     ],
     platforms: [.iOS]
 )
