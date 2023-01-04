@@ -1,4 +1,4 @@
-public enum PokemonTypes: Equatable, CaseIterable {
+public enum PokemonTypes: String, Equatable, CaseIterable {
     case normal
     case fire
     case water

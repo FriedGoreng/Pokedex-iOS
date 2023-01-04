@@ -49,17 +49,13 @@ public struct Pokemon: Hashable, Decodable {
         }
     }
     
-    public struct Types: Hashable, Decodable {
-        let type: NameLink
-    }
-    
     public struct Move: Hashable, Decodable {
         let move: NameLink
     }
     
     public struct NameLink: Hashable, Decodable {
-        let name: String
-        let url: String
+        public let name: String
+        public let url: String
         
         public init(name: String, url: String) {
             self.name = name
@@ -124,6 +120,11 @@ public struct Pokemon: Hashable, Decodable {
             }
         }
     }
+    
+    fileprivate struct Types: Hashable, Decodable {
+        let type: NameLink
+        let slot: Int
+    }
 }
 
 extension Pokemon {
@@ -135,9 +136,17 @@ extension Pokemon {
         height = try container.decode(Int.self, forKey: .height)
         abilities = try container.decode([Ability].self, forKey: .abilities)
         moves = []
-        types = []
+        var decodedType: [NameLink] = []
         stats = try container.decode(Stats.self, forKey: .stats)
-        
+        var typeContainer = try container.nestedUnkeyedContainer(forKey: .types)
+        guard let size = typeContainer.count else {
+            fatalError("No types?!")
+        }
+        for _ in 0..<size {
+            let type = try typeContainer.decode(Types.self)
+            decodedType.append(NameLink(name: type.type.name, url: type.type.url))
+        }
+        types = decodedType
     }
 }
 
