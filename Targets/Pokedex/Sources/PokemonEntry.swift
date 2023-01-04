@@ -29,7 +29,8 @@ struct PokemonEntry: View {
         if case let .loaded(pokemon) = viewModel.content {
             VStack{
                 HStack {
-                    Helper.getPokemonImage(viewModel.entry.id).padding()
+                    Helper.getPokemonImage(viewModel.entry.id)
+                        .padding()
                     Spacer()
                     VStack {
                         Text(Helper.capitaliseFirst(pokemon.name))

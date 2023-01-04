@@ -10,7 +10,7 @@ extension Requests {
             height: 1,
             abilities: [],
             moves: [],
-            types: [],
+            types: [.init(name: "grass", url: "nan"), .init(name: "poison", url: "nan")],
             stats: Pokemon.Stats(hp: 45, atk: 49, def: 49, spAtk: 65, spDef: 65, speed: 45)
         )).setFailureType(to: Error.self)
             .eraseToAnyPublisher()
