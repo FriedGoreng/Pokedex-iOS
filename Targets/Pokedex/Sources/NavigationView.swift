@@ -13,18 +13,19 @@ struct NavigationView: View {
     //Store filter properties here so ForEach can grab filtered array
     //Also implement Search
     var body: some View {
-            VStack{
+        ScrollView{
+            LazyVStack{
                 Text("Pokedex Entry").font(.system(size: 32)).padding()
-                    List {
-                        ForEach(1..<152) { el in
-                            NavigationLink(value: PokeEntry(id: el)) {
-                                NavigationItem(el, "Something")
-                            }
-                        }
+                ForEach(1..<152) { el in
+                    NavigationLink(value: PokeEntry(id: el)) {
+                        NavigationItem(el, "Something")
                     }
-            }.navigationDestination(for: PokeEntry.self) { entry in
-                PokemonEntry(ContentViewModel(entry, .live(id: String(entry.id))))
+                }
+  
             }
+        }.navigationDestination(for: PokeEntry.self) { entry in
+            PokemonEntry(ContentViewModel(entry, .live(id: String(entry.id))))
+        }
     }
 }
 
