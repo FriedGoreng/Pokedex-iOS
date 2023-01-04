@@ -23,7 +23,7 @@ struct NavigationItem: View {
             }
             Spacer()
             Text(name).font(.body)
-        }
+        }.padding()
     }
 }
 

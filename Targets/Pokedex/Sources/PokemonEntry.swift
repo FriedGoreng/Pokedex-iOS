@@ -3,6 +3,7 @@ import SwiftUI
 import Loadable
 import Combine
 import Requests
+import PokemonTypes
 
 class ContentViewModel: ObservableObject {
     @Published var content: Loadable<Pokemon, NSError> = Loadable<Pokemon, NSError>()
@@ -39,9 +40,14 @@ struct PokemonEntry: View {
                             .font(.subheadline).padding(.init(top: 5, leading: 0, bottom: 0, trailing: 0))
                     }.padding()
                 }
-                StatsChart(pokemon.stats)
-                Spacer()
-                
+                HStack{
+                    ForEach(0..<pokemon.types.count) { index in
+                        if let type = PokemonTypes(rawValue: pokemon.types[index].name) {
+                            TypeView(type: type)
+                        }
+                    }
+                }
+                StatsChart(pokemon.stats)?.padding()
             }.padding()
         } else {
             VStack {
