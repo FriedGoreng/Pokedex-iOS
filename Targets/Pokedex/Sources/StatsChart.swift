@@ -18,26 +18,44 @@ struct StatsChart: View {
                     x: .value("Stat", "hp"),
                     y: .value("Value", statList.hp.baseStat)
                 ).foregroundStyle(.brown)
+                    .annotation {
+                        Text("\(statList.hp.baseStat)")
+                    }
                 BarMark(
                     x: .value("Stat", "atk"),
                     y: .value("Value", statList.atk.baseStat)
                 ).foregroundStyle(.indigo)
+                    .annotation {
+                        Text("\(statList.atk.baseStat)")
+                    }
                 BarMark(
                     x: .value("Stat", "def"),
                     y: .value("Value", statList.def.baseStat)
                 ).foregroundStyle(.green)
+                    .annotation {
+                        Text("\(statList.def.baseStat)")
+                    }
                 BarMark(
                     x: .value("Stat", "spAtk"),
                     y: .value("Value", statList.spAtk.baseStat)
                 ).foregroundStyle(.mint)
+                    .annotation {
+                        Text("\(statList.spAtk.baseStat)")
+                    }
                 BarMark(
                     x: .value("Stat", "spDef"),
                     y: .value("Value", statList.spDef.baseStat)
                 ).foregroundStyle(.purple)
+                    .annotation {
+                        Text("\(statList.spDef.baseStat)")
+                    }
                 BarMark(
                     x: .value("Stat", "speed"),
                     y: .value("Value", statList.speed.baseStat)
                 ).foregroundStyle(.orange)
+                    .annotation {
+                        Text("\(statList.speed.baseStat)")
+                    }
             }
         }
     }
