@@ -136,8 +136,9 @@ extension Pokemon {
         height = try container.decode(Int.self, forKey: .height)
         abilities = try container.decode([Ability].self, forKey: .abilities)
         moves = []
-        var decodedType: [NameLink] = []
         stats = try container.decode(Stats.self, forKey: .stats)
+        
+        var decodedType: [NameLink] = []
         var typeContainer = try container.nestedUnkeyedContainer(forKey: .types)
         guard let size = typeContainer.count else {
             fatalError("No types?!")
